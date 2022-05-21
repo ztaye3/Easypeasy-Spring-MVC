@@ -1,0 +1,372 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.79.0">
+    <title>Easy Peasy Cook</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/pricing/">
+
+    <link rel="stylesheet" href="assets/fonts/fa/css/font-awesome.min.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .container {
+        max-width: 1200px;
+        padding-top: 50px
+      }
+
+      .page-header {
+        max-width: 700px;
+      }
+
+      .searchBox {
+        border: 0;
+        border-bottom: 2px solid #c3ccd5;
+        z-index: 999;
+        position: relative;
+        background: transparent;
+        padding-left: 35px;
+        width: 90%;
+      }
+
+      .searchIcon {
+        color: #c3ccd5;
+        margin-top: 10px;
+        margin-left: 5px;
+        z-index: 1;
+        position: absolute;
+      }
+
+      .bannerIcon {
+        color: #788ca1;
+        padding-top: 8px;
+        padding-left: 10px
+      }
+
+      .profilePic {
+        border-radius: 50px;
+        width: 30px;
+        height: 30px;
+      }
+
+      .profilePicLarge {
+        border-radius: 50px;
+        width: 50px;
+        height: 50px;
+      }
+
+      .profilePicMini {
+        border-radius: 50px;
+        width: 25px;
+        height: 25px;
+      }
+
+      .profileStats {
+        font-size: 13px;
+        margin-top: -5px;
+        color: #5e7387
+      }
+
+      .recipeListTitle {
+        margin-bottom: 22px;
+      }
+
+      .recipeList {
+        font-size: 13px;
+        margin-bottom: 10px;
+        color: #5e7387
+      }
+
+      .followersCount {
+        text-align: left;
+        padding-top: 8px;
+        padding-left: 4px;
+        margin-bottom: 0;
+      }
+
+      .cardHeader {
+        height: 60px;
+        background-color: #fff;
+        opacity: 95%;
+        margin-bottom: -60px
+      }
+
+      .cardFavoriteIcon {
+        float: right;
+        margin-top: -25px;
+        color: #788ca1;
+      }
+
+      .activeUserPic {
+        width: 35px;
+        padding: 0;
+      }
+
+      .footerCardText {
+        font-size: 10.5px;
+        color: #788ca1;
+        font-weight: 500;
+      }
+
+      .footerCopyright {
+        font-size: 10.5px;
+        color: #788ca1;
+      }
+
+      @media only screen and (max-width: 767px) {
+        .profileDetails {
+          text-align: center;
+        }
+      }
+
+    </style>
+</head>
+<body>
+
+<header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+
+    <div class="row" style="width:100%">
+
+        <div class="col-md-3">
+            <center><img src="assets/images/logo.png" width="45px"></center>
+        </div>
+
+        <div class="col-md-6" style="padding-left: 7%">
+            <form class="d-flex">
+                <i class="fa fa-search searchIcon"></i>
+                <input class="form-control me-2 searchBox" type="search" placeholder="Search">
+            </form>
+        </div>
+
+        <div class="col-md-3">
+            <div class="row" style="padding-top: 8px">
+                <div class="col-sm-2">
+                </div>
+                <div class="col-sm-2">
+                    <i class="fa fa-bell-o bannerIcon"></i>
+                </div>
+                <div class="col-sm-2">
+                    <i class="fa fa-envelope-o bannerIcon"></i>
+                </div>
+                <div class="col-sm-2">
+                    <a href="/" th:href="@{/user/getUser}" style="text-decoration: none;">
+                        <img src="assets/images/user-icon.png" class="profilePic"></a>
+                </div>
+                <div class="col-sm-2">
+                    <a sec:authorize="isAuthenticated()" class="btn btn-primary btn-sm" th:href="@{/logout}">Logout</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</header>
+
+<main class="container">
+
+    <div class="row">
+
+        <div class="col-md-3">
+
+            <div class="card mb-3">
+                <div class="card-body" style="padding-bottom: 5px;">
+                    <div class="row profileDetails">
+                        <div class="col-sm-3">
+                            <a href="/" th:href="@{/user/getUser}" style="text-decoration: none;">
+                                <img src="assets/images/user-icon.png" class="profilePicLarge"></a>
+                        </div>
+                        <div class="col-sm-9">
+                            <div>
+                                <h6><tr th:each="user : ${user}"><td th:text="${user.firstName}"><td> </td><td th:text="${user.lastName}"></td></tr></h6>
+                                <p style="font-size: 13px; margin-top:-10px"><tr th:each="role : ${user.roles}"><td th:text="${role.name}"><td></tr></p>
+                                <p style="font-size: 12px; margin-top:-16px">584 followers - 23k likes</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr style="margin-top:0">
+
+                    <div class="row text-center">
+                        <div class="col-sm-4">
+                            <h5><tr th:each="recipeCount : ${recipeCount}"><a href="/" th:href="@{/recipes}" style="text-decoration: none;"><td th:text="${recipeCount}"></a></tr></h5>
+                            <p class="profileStats">Recipes</p>
+                        </div>
+                        <div class="col-sm-4">
+                            <h5>75</h5>
+                            <p class="profileStats">Saved</p>
+                        </div>
+                        <div class="col-sm-4">
+                            <h5>84</h5>
+                            <p class="profileStats">Following</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body" style="padding-bottom: 5px;">
+                    <div class="row">
+                        <div style="text-align: left">
+                            <h6 class="recipeListTitle">Top 5 Recipe today</h6>
+                            <p class="recipeList">Tea-Smoked Creamy Chicken</p>
+                            <p class="recipeList">Pickled Savory Tortilla</p>
+                            <p class="recipeList">Stuffed Basil & Mint Salmon</p>
+                            <p class="recipeList">Strawberry Jelly</p>
+                            <p class="recipeList">Cinnamone and Lime Toffee</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+
+            <div class="card mb-6 shadow-lg">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p class="followersCount">286 of your followers are online</p>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-primary" style="margin-top: 2px; float:right;"><a href="/" th:href="@{/recipe/new}" style="text-decoration: none; color: white">Create Recipe</a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+            <div th:if="${#lists.isEmpty(recipes)}">
+                <h4>No recipes available. </h4>
+            </div>
+
+            <div th:if="${not #lists.isEmpty(recipes)}">
+                <div th:each="recipe : ${recipes}">
+
+                    <div class="card mb-6 shadow-none">
+
+                        <div class="card-body">
+                            <div class="card shadow-md">
+                                <div class="cardHeader">
+                                    <div class="row">
+                                        <div class="col-md-1" style="padding: 16px 10px 10px 27px">
+                                            <img src="assets/images/user-icon.png" class="profilePicMini">
+                                        </div>
+                                        <div class="col-md-6 col-sm-3" style="padding: 15px 0 0 15px">
+                                            <p style="font-size: 12px; color: #000; font-weight: 500;">Ahmad Fahim</p>
+                                            <p style="font-size: 11px; margin-top: -18px; color:#788ca1">2h ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <img th:src="${recipe.photos }" height="280px">
+                                <div class="card-body">
+                                    <h6><td th:text="${ recipe.name }"></td></h6>
+                                    <i class="fa fa-heart-o cardFavoriteIcon"></i>
+                                    <p class="card-text" style="font-size: 13px; color:#788ca1"><td th:text="${ recipe.description }"></td></p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small style="font-size: 13px;">38 Likes - 8 comments</small>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-outline-primary" style="padding-top: 0; padding-bottom: 2px; padding-left:5px; font-size:12px">
+                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                </svg>
+                                                Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <br>
+
+        <div class="col-md-3">
+
+            <div class="card" style="margin-bottom: 20px;">
+                <div class="card-body" style="padding-bottom: 5px;">
+                    <div class="row mb-2">
+                        <h6 class="recipeListTitle">Live cooking by scratch</h6>
+                        <iframe width="245px" height="160" src="https://www.youtube.com/embed/mhDJNfV7hjk" style="border-radius: 5px;"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-bottom: 20px">
+                <div class="card-body" style="padding-bottom: 5px;">
+                    <div class="row mb-2">
+                        <h6 class="recipeListTitle">Most Active Today</h6>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <img src="assets/images/user-icon.png" class="activeUserPic">
+                            </div>
+                            <div class="col-sm-2">
+                                <img src="assets/images/user-icon.png" class="activeUserPic">
+                            </div>
+                            <div class="col-sm-2">
+                                <img src="assets/images/user-icon.png" class="activeUserPic">
+                            </div>
+                            <div class="col-sm-2">
+                                <img src="assets/images/user-icon.png" class="activeUserPic">
+                            </div>
+                            <div class="col-sm-2">
+                                <img src="assets/images/user-icon.png" class="activeUserPic">
+                            </div>
+                            <div class="col-sm-2">
+                                <img src="assets/images/user-icon.png" class="activeUserPic">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body" style="padding-bottom: 0;">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <p class="footerCardText">About scrat</p>
+                        </div>
+                        <div class="col-sm-4">
+                            <p class="footerCardText">Help Center</p>
+                        </div>
+                        <div class="col-sm-4">
+                            <p class="footerCardText">Privacy Policy</p>
+                        </div>
+
+                        <p class="footerCopyright">© Copyright 2020</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</main>
+
+</body>
+</html>
