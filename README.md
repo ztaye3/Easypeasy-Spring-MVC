@@ -3,15 +3,6 @@ Created with Spring Framework and Gradle.
 
 # 1. General info
 
-### Team Members
-* Ivan Glushenkov
-* Mohammad Naim Dahee
-* Zekarias Taye
-* Emily Achieng'
-* Anastasiya Fokina
-* Bezawit Teklemariam
-
-
 ### OOP and Design principles
 In the OOP part, we have made our code and modules loosely coupled by using interfaces and service layers.
 ```
@@ -24,10 +15,11 @@ C: Controller  —- This orchestrate users request
 ``` 
 Pattern:Spring MVC
 FrameWork: Spring boot
-DB: SQLite with JPA and Hibernate
+DB: MYSQL with JPA and Hibernate
 Security: Spring Security module with authentication
 Front end: thymeleaf
 FrameWork: BootStrap
+Test: Junit with Mockito
 Versioning: git
 Repository: Gitlab
 ``` 

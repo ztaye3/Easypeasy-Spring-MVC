@@ -8,7 +8,7 @@ import java.util.List;
 public interface CRUService<T> {
 
     /**
-     * This method method returns available data
+     * This method  returns available data
      *
      *  @return generic list
      */
@@ -16,7 +16,7 @@ public interface CRUService<T> {
     List<?> listAll();
 
     /**
-     * This method method returns by id
+     * This method  returns by id
      *
      * @param id integer type
      * @return current generic object

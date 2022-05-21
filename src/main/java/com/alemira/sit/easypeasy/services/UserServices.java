@@ -12,7 +12,7 @@ import java.util.List;
 public interface UserServices extends CRUService<UserDomain>, UserDetailsService {
 
     /**
-     * This method method creates a new user during registration
+     * This method creates a new user during registration
      *
      *  @param user UserDomain type
      *  @return registered User
@@ -20,7 +20,7 @@ public interface UserServices extends CRUService<UserDomain>, UserDetailsService
     User createUser(UserDomain user);
 
     /**
-     * This method method returns all registered users
+     * This method  returns all registered users
      *
      *  @return generic list
      */
@@ -29,7 +29,7 @@ public interface UserServices extends CRUService<UserDomain>, UserDetailsService
     List<?> listAll();
 
     /**
-     * This method method returns user by id
+     * This method  returns user by id
      *
      * @param id integer type
      * @return UserDomain

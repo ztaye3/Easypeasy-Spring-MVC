@@ -1,7 +1,7 @@
 package com.alemira.sit.easypeasy.controllers;
 
 import com.alemira.sit.easypeasy.domain.UserDomain;
-import com.alemira.sit.easypeasy.services.UserService;
+import com.alemira.sit.easypeasy.services.UserServices;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -22,7 +22,7 @@ public class UserDomainControllerTest {
 
     // Mockito Mock Object
     @Mock 
-    private UserService userService;
+    private UserServices userService;
 
     // Setups up controller, and injects mock objects into it.
     @InjectMocks 
