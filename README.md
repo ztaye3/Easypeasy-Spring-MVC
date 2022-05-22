@@ -20,8 +20,9 @@ Security: Spring Security module with authentication
 Front end: thymeleaf
 FrameWork: BootStrap
 Test: Junit with Mockito
+build: Devbot
 Versioning: git
-Repository: Gitlab
+Repository: Github
 ``` 
 
 

@@ -4,16 +4,14 @@ import com.alemira.sit.easypeasy.entities.Recipe;
 import com.alemira.sit.easypeasy.entities.User;
 import com.alemira.sit.easypeasy.services.RecipeServices;
 import com.alemira.sit.easypeasy.services.UserServices;
+import com.alemira.sit.easypeasy.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
@@ -31,13 +29,16 @@ public class RecipeController {
     @Autowired
     private UserServices userManagementService;
 
+    @Autowired
+    private Utils utils;
+
     //Get all user recipes controller
     @RequestMapping("/recipes")
     public String listOfRecipes(Model model) {
 
 
         Collection<Recipe> recipes = new ArrayList<>();
-        User user = getCurrentUser();
+        User user = utils.getCurrentUser();
 
         //Loop over all user recipes
         for(Recipe recipe : user.getRecipes()){
@@ -53,7 +54,7 @@ public class RecipeController {
     @RequestMapping("/recipe/{id}")
     public String getRecipe(@PathVariable Integer id , Model model) {
 
-        User user = getCurrentUser();
+        User user = utils.getCurrentUser();
 
         Recipe currentRecipe = new Recipe();
 
@@ -104,26 +105,11 @@ public class RecipeController {
     @RequestMapping("/recipe/delete/{id}")
     public String delete(@PathVariable Integer id) {
 
-        User user = getCurrentUser();
+        User user = utils.getCurrentUser();
 
         recipeServices.deleteRecipe(user.getUserName(), id);
 
         return "redirect:/recipes";
     }
 
-    private User getCurrentUser(){
-
-        //Get currently logged in users data
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        String userName = null;
-
-        if (principal instanceof UserDetails) {
-            userName = ((UserDetails)principal).getUsername();
-        } else {
-            userName = principal.toString();
-        }
-
-        return userManagementService.loadUserByUsernameCredentials(userName);
-    }
 }
