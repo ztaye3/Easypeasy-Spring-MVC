@@ -20,7 +20,7 @@ Security: Spring Security module with authentication
 Front end: thymeleaf
 FrameWork: BootStrap
 Test: Junit with Mockito
-build: Devbot
+Build: Devbot
 Versioning: git
 Repository: Github
 ``` 
@@ -92,7 +92,7 @@ easypeasy
 # 3. Running locally
 Port Number 8001
 1) Clone the latest version of this repository
-``` git clone https://gitlab.sit.dev/mohammad/easypeasy/ ``` (_note: your credentials are needed_)
+``` git clone https://github.com/ztaye3/easypeasy.git ``` (_note: your credentials are needed_)
 
 2) Open the project in Intellij IDEA and/or build the project using Gradle
 
